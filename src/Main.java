@@ -14,11 +14,17 @@ public class Main {
 
         //Indlæse spillerens hånd
         Scanner input = new Scanner(System.in);
-        Haand spillersHaand = null;
+        System.out.println("Vælg sten, saks eller papir: ");
         String spillerenString = input.next();
-        if (spillerenString.equalsIgnoreCase("sten")) {spillersHaand = Haand.STEN;}
-        if (spillerenString.equalsIgnoreCase("saks")) {spillersHaand = Haand.SAKS;}
-        if (spillerenString.equalsIgnoreCase("papir")) {spillersHaand = Haand.PAPIR;}
+        Haand spillersHaand = null;
+            if (spillerenString.equalsIgnoreCase("sten")) {spillersHaand = Haand.STEN;}
+            else if (spillerenString.equalsIgnoreCase("saks")) {spillersHaand = Haand.SAKS;}
+            else if (spillerenString.equalsIgnoreCase("papir")) {spillersHaand = Haand.PAPIR;}
+            else {
+                System.out.println("Du har tastet forkert input. Spillet slutter.");
+                System.exit(0);
+            }
+
         System.out.println("Spilleren slår " + spillersHaand);
 
         //Computeren generer en hånd
@@ -34,7 +40,11 @@ public class Main {
         int resultat = runde1.slaa(computersHaand, spillersHaand);
 
         //Udråb en vinder
-        System.out.println("Resultatet er " + resultat);
-        // TODO vis resultatet mere meningsfyldt
+        if (resultat == 0)
+            System.out.println("Spillet er uafgjort.");
+        if (resultat == 1)
+            System.out.println("Computeren har vundet.");
+        if (resultat == 2)
+            System.out.println("Spilleren har vundet.");
     }
 }
